@@ -11,7 +11,7 @@
             </not>
         </preConditions>
         <createTable tableName="task">
-            <column name="task_id" type="VARCHAR(256)">
+            <column name="id" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="TIMESTAMP(6) WITHOUT TIME ZONE" defaultValueComputed="CURRENT_TIMESTAMP"/>

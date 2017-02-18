@@ -2,7 +2,7 @@
 
 App.factory('TaskService', ['$http', '$q', function($http, $q){
 
-    var HOST = "http://localhost:8080/tasks";
+    var HOST = "/tasks";
 
     return {
 

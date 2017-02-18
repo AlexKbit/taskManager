@@ -2,7 +2,7 @@
 
 App.factory('UserService', ['$http', '$q', function($http, $q){
 
-    var HOST = "http://localhost:8080/user";
+    var HOST = "/user";
 
     return {
         newUser: function() {
