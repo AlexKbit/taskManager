@@ -1,0 +1,11 @@
+spring:
+  profiles: local
+  datasource:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/task_manager_local
+      username: user
+      password: user
+  thymeleaf:
+    cache: false
+logging:
+    config: classpath:logback-tomcat.xml

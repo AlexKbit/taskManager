@@ -1,0 +1,11 @@
+spring:
+  profiles: dev
+  datasource:
+      driverClassName: org.postgresql.Driver
+      url: ${DATABASE_JDBC_URL}
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+  thymeleaf:
+    cache: false
+logging:
+    config: classpath:logback-tomcat.xml

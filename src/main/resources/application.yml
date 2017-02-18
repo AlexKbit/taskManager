@@ -1,0 +1,13 @@
+server:
+    port: ${PORT:9000}
+spring:
+  application:
+      name: task-manager
+      date: '@build.date@'
+      version: '@build.version@'
+  profiles.active: local
+  messages.encoding: UTF-8
+liquibase:
+    enabled: true
+    change-log: classpath:db/master.xml
+
