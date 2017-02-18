@@ -50,7 +50,7 @@ public class TaskServiceImpl implements TaskService {
             return;
         }
         if (!task.getUserId().equals(userId)) {
-            LOGGER.error("User with userId = {} not allowed for this task with uderId = {}",
+            LOGGER.error("User with userId = {} not allowed for this task with userId = {}",
                     userId, task.getUserId());
             throw new ServiceException("User not allowed for this task");
         }
@@ -67,7 +67,7 @@ public class TaskServiceImpl implements TaskService {
             return;
         }
         if (!task.getUserId().equals(userId)) {
-            LOGGER.error("User with userId = {} not allowed for this task with uderId = {}",
+            LOGGER.error("User with userId = {} not allowed for this task with userId = {}",
                     userId, task.getUserId());
             throw new ServiceException("User not allowed for this task");
         }
