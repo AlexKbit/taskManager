@@ -3,15 +3,16 @@ package com.taskmanager.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Launcher for spring boot application.
  */
 @SpringBootApplication
 @ComponentScan("com.taskmanager")
-public class ApplicationLauncher extends WebMvcConfigurerAdapter {
+public class ApplicationLauncher extends SpringBootServletInitializer {
 
     /**
      * Start application.
@@ -22,4 +23,8 @@ public class ApplicationLauncher extends WebMvcConfigurerAdapter {
         SpringApplication.run(ApplicationLauncher.class, args);
     }
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(ApplicationLauncher.class);
+    }
 }
