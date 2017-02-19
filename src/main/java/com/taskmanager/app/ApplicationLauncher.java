@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * Launcher for spring boot application.
  */
+@ComponentScan
+@EnableScheduling
 @SpringBootApplication
-@ComponentScan("com.taskmanager")
 public class ApplicationLauncher extends SpringBootServletInitializer {
 
     /**

@@ -1,10 +1,12 @@
 package com.taskmanager.repositories;
 
 import com.taskmanager.model.Task;
+import com.taskmanager.model.TaskStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +29,7 @@ public interface TaskRepository extends CrudRepository<Task, String> {
      * @return List of tasks
      */
     @Query("select t from Task t where t.status = ?1 order by t.createdAt desc")
-    List<Task> findByStatusOrderByTime(String status);
+    List<Task> findByStatusOrderByTime(@Param("status") TaskStatus status);
 
     /**
      * Load list of tasks after sets date
@@ -35,5 +37,5 @@ public interface TaskRepository extends CrudRepository<Task, String> {
      * @return List of tasks
      */
     @Query("select t from Task t where t.createdAt < :date")
-    List<Task> findOldByTime(Date date);
+    List<Task> findOldByTime(@Param("date") Date date);
 }

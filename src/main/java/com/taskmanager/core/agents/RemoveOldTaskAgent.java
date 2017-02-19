@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Agent for execute tasks in status IN_PROGRESS -> SUCCESS
+ * Agent for remove old tasks
  */
 @Component
 public class RemoveOldTaskAgent {

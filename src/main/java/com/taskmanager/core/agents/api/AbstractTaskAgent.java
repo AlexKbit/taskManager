@@ -5,9 +5,7 @@ import com.taskmanager.model.TaskStatus;
 import com.taskmanager.repositories.TaskRepository;
 import com.taskmanager.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.NestedRuntimeException;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -17,12 +15,6 @@ import java.util.List;
  * Abstract class for agents
  */
 public abstract class AbstractTaskAgent implements Agent {
-
-    /**
-     * Fixed delay for execute
-     */
-    @Value("")
-    private static String FIXED_DELAY;
 
     /**
      * Task repository
@@ -55,7 +47,7 @@ public abstract class AbstractTaskAgent implements Agent {
      * @return List of {@link Task}
      */
     private List<Task> loadTasks() {
-        return taskRepository.findByStatusOrderByTime(sourceTaskStatus.name());
+        return taskRepository.findByStatusOrderByTime(sourceTaskStatus);
     }
 
     /**
@@ -99,7 +91,6 @@ public abstract class AbstractTaskAgent implements Agent {
      * Execute agent
      */
     @Override
-    @Scheduled(fixedDelayString = "${app.fixedDelay:1000}")
     public void execute() {
         List<Task> taskList = loadTasks();
         if (taskList == null || taskList.isEmpty()) {
