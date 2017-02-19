@@ -3,7 +3,7 @@ package com.taskmanager.service.exception;
 /**
  * Exception for service layer
  */
-public class ServiceException extends Exception {
+public class ServiceException extends RuntimeException {
 
     /**
      * Create ServiceException

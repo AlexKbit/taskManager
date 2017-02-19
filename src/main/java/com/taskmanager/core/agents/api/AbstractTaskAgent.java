@@ -4,7 +4,7 @@ import com.taskmanager.model.Task;
 import com.taskmanager.model.TaskStatus;
 import com.taskmanager.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.core.NestedRuntimeException;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalTime;
@@ -91,7 +91,7 @@ public abstract class AbstractTaskAgent implements Agent {
         }
         try {
             taskRepository.save(task);
-        } catch (DataAccessException re) {
+        } catch (NestedRuntimeException re) {
             saveFailed(task, re.getMessage(), LocalTime.now());
         }
     }

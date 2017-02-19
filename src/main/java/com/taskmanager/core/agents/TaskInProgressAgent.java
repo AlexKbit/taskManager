@@ -1,7 +1,7 @@
 package com.taskmanager.core.agents;
 
 import com.taskmanager.core.agents.api.AbstractTaskAgent;
-import com.taskmanager.core.service.hash.impl.api.HashSolver;
+import com.taskmanager.core.algorithms.api.HashSolver;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.TaskStatus;
 import org.slf4j.Logger;
