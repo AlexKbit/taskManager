@@ -10,4 +10,10 @@ spring:
 liquibase:
     enabled: true
     change-log: classpath:db/master.xml
+app:
+  fixedDelay:
+    validateTask: 1000
+    hashSolveTask: 1000
+    removeOld: 1000
+  removeMoreDays: 7
 

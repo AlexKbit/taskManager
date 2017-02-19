@@ -3,7 +3,9 @@ package com.taskmanager.core.agents.api;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.TaskStatus;
 import com.taskmanager.repositories.TaskRepository;
+import com.taskmanager.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -19,7 +21,8 @@ public abstract class AbstractTaskAgent implements Agent {
     /**
      * Fixed delay for execute
      */
-    private static final String FIXED_DELAY = "1000";
+    @Value("")
+    private static String FIXED_DELAY;
 
     /**
      * Task repository
@@ -51,7 +54,7 @@ public abstract class AbstractTaskAgent implements Agent {
      * Load tasks with source status
      * @return List of {@link Task}
      */
-    protected List<Task> loadTasks() {
+    private List<Task> loadTasks() {
         return taskRepository.findByStatusOrderByTime(sourceTaskStatus.name());
     }
 
@@ -59,7 +62,7 @@ public abstract class AbstractTaskAgent implements Agent {
      * Save task with target status
      * @param task {@link Task}
      */
-    protected void saveSuccess(Task task, LocalTime startTime) {
+    private void saveSuccess(Task task, LocalTime startTime) {
         task.setStatus(targetTaskStatus);
         task.applyTime(ChronoUnit.MILLIS.between(startTime, LocalTime.now()));
         extraSave(task);
@@ -70,7 +73,7 @@ public abstract class AbstractTaskAgent implements Agent {
      * @param task {@link Task}
      * @param msg error message
      */
-    protected void saveFailed(Task task, String msg, LocalTime startTime) {
+    private void saveFailed(Task task, String msg, LocalTime startTime) {
         task.setStatus(TaskStatus.FAIL);
         task.setErrorMsg(msg);
         task.applyTime(ChronoUnit.SECONDS.between(LocalTime.now(), startTime));
@@ -89,29 +92,34 @@ public abstract class AbstractTaskAgent implements Agent {
         if (TaskStatus.STOP == oldTask.getStatus()) {
             return; // this task already stopped
         }
-        try {
-            taskRepository.save(task);
-        } catch (NestedRuntimeException re) {
-            saveFailed(task, re.getMessage(), LocalTime.now());
-        }
+        taskRepository.save(task);
     }
 
     /**
      * Execute agent
      */
     @Override
-    @Scheduled(fixedDelayString = FIXED_DELAY)
+    @Scheduled(fixedDelayString = "${app.fixedDelay:1000}")
     public void execute() {
         List<Task> taskList = loadTasks();
         if (taskList == null || taskList.isEmpty()) {
             return;
         }
-        taskList.forEach(t -> performTask(t));
+        for (Task task : taskList) {
+            try {
+                final LocalTime timeStart = LocalTime.now();
+                performTask(task);
+                saveSuccess(task, timeStart);
+            } catch (ServiceException | NestedRuntimeException e) {
+                saveFailed(task, e.getMessage(), LocalTime.now());
+            }
+        }
     }
 
     /**
      * Perform task
      * @param task {@link Task}
+     * @return Success/Fail
      */
     protected abstract void performTask(Task task);
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,4 +28,12 @@ public interface TaskRepository extends CrudRepository<Task, String> {
      */
     @Query("select t from Task t where t.status = ?1 order by t.createdAt desc")
     List<Task> findByStatusOrderByTime(String status);
+
+    /**
+     * Load list of tasks after sets date
+     * @param date time
+     * @return List of tasks
+     */
+    @Query("select t from Task t where t.createdAt < :date")
+    List<Task> findOldByTime(Date date);
 }
