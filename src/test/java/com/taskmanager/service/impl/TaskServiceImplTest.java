@@ -15,10 +15,9 @@ import org.junit.runner.RunWith;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 /**
  * Test for {@link TaskServiceImpl}
@@ -156,7 +155,7 @@ public class TaskServiceImplTest extends EasyMockSupport {
 
     @Test
     public void testLoad() throws ServiceException {
-        expect(taskRepository.findAll(anyObject(Pageable.class))).andReturn(pageTasks);
+        expect(taskRepository.findByUserId(eq(USER_ID), anyObject(Pageable.class))).andReturn(pageTasks);
         expect(pageTasks.getSize()).andReturn(10);
         expect(pageTasks.getTotalPages()).andReturn(4);
         replayAll();
