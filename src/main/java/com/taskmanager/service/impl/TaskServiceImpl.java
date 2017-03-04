@@ -75,7 +75,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Page<Task> load(int page, int count, String userId) {
         Pageable pageable = new PageRequest(page, count);
-        Page<Task> pageTasks = taskRepository.findAll(pageable);
+        Page<Task> pageTasks = taskRepository.findByUserId(userId, pageable);
         log.debug("Load {} tasks on page {}/{}", pageTasks.getSize(), page, pageTasks.getTotalPages());
         return pageTasks;
     }

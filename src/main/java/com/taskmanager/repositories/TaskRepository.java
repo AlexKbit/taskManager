@@ -4,6 +4,7 @@ import com.taskmanager.model.Task;
 import com.taskmanager.model.TaskStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,14 +15,15 @@ import java.util.List;
 /**
  * Task repository
  */
-public interface TaskRepository extends CrudRepository<Task, String> {
+public interface TaskRepository extends JpaRepository<Task, String> {
 
     /**
      * Find all tasks on page
      * @param pageable {@link Pageable}
      * @return {@link Page} of tasks
      */
-    Page<Task> findAll(Pageable pageable);
+    @Query("select t from Task t where t.userId = :userId")
+    Page<Task> findByUserId(@Param("userId") String userId, Pageable pageable);
 
     /**
      * Load list of tasks with status
