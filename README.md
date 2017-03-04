@@ -1,6 +1,10 @@
 # Project Overview #
 
-Task manager - application for an asynchronous compute the hash for external / internal files.
+Task manager - application for an asynchronous compute the hash for external resources.
+
+## State
+[![Build Status](https://travis-ci.org/AlexKbit/taskManager.svg?branch=master)](https://travis-ci.org/AlexKbit/taskManager)
+[![codecov.io](https://codecov.io/github/AlexKbit/taskManager/coverage.svg?branch=master)](https://codecov.io/gh/AlexKbit/taskManager?branch=master)
 
 [Go to web page](https://task-manager-prod.herokuapp.com/)
 # Technologies & Tools
@@ -15,7 +19,3 @@ Task manager - application for an asynchronous compute the hash for external / i
 
 * Heroku
 * CI [Travis](https://travis-ci.org/AlexKbit/taskManager/branches)
-
-## State
-[![Build Status](https://travis-ci.org/AlexKbit/taskManager.svg?branch=master)](https://travis-ci.org/AlexKbit/taskManager)
-[![codecov.io](https://codecov.io/github/AlexKbit/taskManager/coverage.svg?branch=master)](https://codecov.io/gh/AlexKbit/taskManager?branch=master)
