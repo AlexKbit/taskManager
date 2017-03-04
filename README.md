@@ -2,14 +2,20 @@
 
 Task manager - application for an asynchronous compute the hash for external / internal files.
 
-### Technology stack ###
+[Go to web page](https://task-manager-prod.herokuapp.com/)
+# Technologies & Tools
 
 * Java 8
 * Maven 3.1
-* Spring 4.2.5 (Core, Data, MVC, RESTapi)
-* HSQLDB(in memory)
+* Spring Framework (DI & IoC, Boot, Data)
 * AngularJS
-* jUnit/dbUnit/EasyMock!
+* liquibase
+* PostgreSQL/HSQLDB
+* Junit/EasyMock/dbUnit
 
-### Application UI ###
-[taskManager.png](https://bitbucket.org/repo/AqX75p/images/4177593445-taskManager.png)
+* Heroku
+* CI [Travis](https://travis-ci.org/AlexKbit/taskManager/branches)
+
+## State
+[![Build Status](https://travis-ci.org/AlexKbit/taskManager.svg?branch=master)](https://travis-ci.org/AlexKbit/taskManager)
+[![codecov.io](https://codecov.io/github/AlexKbit/taskManager/coverage.svg?branch=master)](https://codecov.io/gh/AlexKbit/taskManager?branch=master)
