@@ -11,9 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * Launcher for spring boot application.
  */
-@ComponentScan
 @EnableScheduling
 @SpringBootApplication
+@ComponentScan("com.taskmanager")
 public class ApplicationLauncher extends SpringBootServletInitializer {
 
     /**

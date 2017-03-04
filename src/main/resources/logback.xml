@@ -15,7 +15,7 @@
         <appender-ref ref="console"/>
     </root>
 
-    <logger name="com.taskmanager" additivity="false" level="DEBUG">
+    <logger name="com.taskmanager" additivity="false" level="INFO">
         <appender-ref ref="console"/>
     </logger>
 

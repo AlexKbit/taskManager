@@ -90,7 +90,7 @@ public class TaskRestController {
                            @RequestParam(name = "count") int count,
                            @RequestParam(name = "userId") String userId){
         Page<Task> loadedPage = taskService.load(page, count, userId);
-        LOGGER.info("Load {} tasks from page: {} with count {} by user: {}", loadedPage.getSize(), page, count, userId);
+        LOGGER.debug("Load {} tasks from page: {} with count {} by user: {}", loadedPage.getSize(), page, count, userId);
         return loadedPage;
     }
 
