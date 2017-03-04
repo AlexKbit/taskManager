@@ -22,22 +22,20 @@
     </div>
 </nav>
 <div align="center">
-
-    <div class="container" style="float:left">
+    <div class="container" align="center">
         <form class="form-inline">
             <label for="taskSrc">SRC:</label>
             <input id="taskSrc" type="text" class="form-control" ng-model="task.src"/>
-            <!--Algoritm[SHA_1;SHA_256;MD5]: <input type="text" ng-model="task.algo" /><br />-->
-            <label for="taskAlgo">Algoritm:</label>
+            <label for="taskAlgo">Algorithm:</label>
             <select id="taskAlgo" class="form-control" name="singleSelect" ng-model="task.algo">
-                <option value="SHA_1">SHA_1</option>
-                <option value="SHA_256">SHA_256</option>
+                <option value="SHA_1">SHA-1</option>
+                <option value="SHA_256">SHA-256</option>
                 <option value="MD5">MD5</option>
             </select>
             <button type="submit" class="btn btn-primary" ng-click="newTask(task)">Create</button>
         </form>
     </div>
-    <div class="container">
+    <div>
         <div class="tableContainer">
             <div class="tableContainer" style="float:right">
                 <!--<button type="submit" class="btn btn-primary" ng-click="pageChanged()">Refresh</button>-->
@@ -47,9 +45,8 @@
                 <thead>
                 <tr>
                     <th>TaskId</th>
-                    <th>UserId</th>
                     <th>SRC</th>
-                    <th>Algo</th>
+                    <th>HashType</th>
                     <th>Time(ms)</th>
                     <th>Result</th>
                     <th>Error</th>
@@ -61,7 +58,6 @@
                 <tbody>
                 <tr data-ng-repeat="task in tasks">
                     <th>{{ task.id }}</th>
-                    <th>{{ task.userId }}</th>
                     <th>{{ task.src }}</th>
                     <th>{{ task.algo }}</th>
                     <th>{{ task.time }}</th>

@@ -14,9 +14,22 @@ public interface HashSolver {
      */
     HashSolver build(HashType hashType);
 
+    /**
+     * Update hash
+     * @param buffer new bytes
+     * @return
+     */
     HashSolver update(byte[] buffer);
 
+    /**
+     * Gets type of solver
+     * @return
+     */
     HashType getType();
 
+    /**
+     * Gets result in Hex
+     * @return
+     */
     String result2Hex();
 }

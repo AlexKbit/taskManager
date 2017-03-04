@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-    /**
-    * Logger
-    */
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     @Autowired
     private TaskRepository taskRepository;
@@ -30,56 +27,56 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void add(Task task) throws ServiceException {
         if (task == null) {
-            LOGGER.error("Task is null");
+            log.error("Task is null");
             throw new ServiceException("Task is null");
         }
         task.setStatus(TaskStatus.WAIT);
         task = taskRepository.save(task);
-        LOGGER.info("Add new task with id = {}", task.getId());
+        log.info("Add new task with id = {}", task.getId());
     }
 
     @Override
     public void stop(String taskId, String userId) throws ServiceException {
         Task task = taskRepository.findOne(taskId);
         if (task == null) {
-            LOGGER.error("Task with id = {} not found", taskId);
+            log.error("Task with id = {} not found", taskId);
             throw new ServiceException("Task not found");
         }
         if (TaskStatus.STOP == task.getStatus() || TaskStatus.SUCCESS == task.getStatus()) {
-            LOGGER.info("Task with id = {} already is stopped or completed", taskId);
+            log.info("Task with id = {} already is stopped or completed", taskId);
             return;
         }
         if (!task.getUserId().equals(userId)) {
-            LOGGER.error("User with userId = {} not allowed for this task with userId = {}",
+            log.error("User with userId = {} not allowed for this task with userId = {}",
                     userId, task.getUserId());
             throw new ServiceException("User not allowed for this task");
         }
         task.setStatus(TaskStatus.STOP);
         taskRepository.save(task);
-        LOGGER.info("Task with id = {} was stopped", taskId);
+        log.info("Task with id = {} was stopped", taskId);
     }
 
     @Override
     public void remove(String taskId, String userId) throws ServiceException {
         Task task = taskRepository.findOne(taskId);
         if (task == null) {
-            LOGGER.info("Task with id = {} already removed", taskId);
+            log.info("Task with id = {} already removed", taskId);
             return;
         }
         if (!task.getUserId().equals(userId)) {
-            LOGGER.error("User with userId = {} not allowed for this task with userId = {}",
+            log.error("User with userId = {} not allowed for this task with userId = {}",
                     userId, task.getUserId());
             throw new ServiceException("User not allowed for this task");
         }
         taskRepository.delete(taskId);
-        LOGGER.info("Task with id = {} was deleted", taskId);
+        log.info("Task with id = {} was deleted", taskId);
     }
 
     @Override
     public Page<Task> load(int page, int count, String userId) {
         Pageable pageable = new PageRequest(page, count);
         Page<Task> pageTasks = taskRepository.findAll(pageable);
-        LOGGER.debug("Load {} tasks on page {}/{}", pageTasks.getSize(), page, pageTasks.getTotalPages());
+        log.debug("Load {} tasks on page {}/{}", pageTasks.getSize(), page, pageTasks.getTotalPages());
         return pageTasks;
     }
 }

@@ -19,7 +19,7 @@ public class InProgressTaskAgent extends AbstractTaskAgent {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(InProgressTaskAgent.class);
+    private static final Logger log = LoggerFactory.getLogger(InProgressTaskAgent.class);
 
     /**
      * Hash solver
@@ -41,11 +41,11 @@ public class InProgressTaskAgent extends AbstractTaskAgent {
     protected void performTask(Task task) {
         String result = dataLoader.solveHash(task.getSrc(), task.getAlgo());
         task.setResult(result);
-        LOGGER.info("Hash solve was completed successfully for task with id = {}", task.getId());
+        log.info("Hash solve was completed successfully for task with id = {}", task.getId());
     }
 
     @Override
-    @Scheduled(fixedDelayString = "${app.fixedDelay.hashSolveTask:1000}")
+    @Scheduled(fixedRateString = "${app.fixedDelay.hashSolveTask:1000}")
     public void execute() {
         super.execute();
     }

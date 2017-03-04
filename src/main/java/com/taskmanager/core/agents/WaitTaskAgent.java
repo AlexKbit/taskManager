@@ -15,10 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WaitTaskAgent extends AbstractTaskAgent {
 
-    /**
-     * Logger
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(WaitTaskAgent.class);
+    private static final Logger log = LoggerFactory.getLogger(WaitTaskAgent.class);
 
     /**
      * Constructor for TaskInProgressAgent
@@ -32,17 +29,17 @@ public class WaitTaskAgent extends AbstractTaskAgent {
      */
     @Override
     protected void performTask(Task task) {
-        if (task.getSrc() == null) {
+        if (task.getSrc() == null || task.getSrc().isEmpty()) {
             throw new ServiceException("Unknown url to resources");
         }
         if (task.getAlgo() == null) {
             throw new ServiceException("Unknown algorithm for solve hash");
         }
-        LOGGER.info("Hash solve was completed successfully for task with id = {}", task.getId());
+        log.debug("Validation successfully completed for task with id = {}", task.getId());
     }
 
     @Override
-    @Scheduled(fixedDelayString = "${app.fixedDelay.validateTask:1000}")
+    @Scheduled(fixedRateString = "${app.fixedDelay.validateTask:1000}")
     public void execute() {
         super.execute();
     }

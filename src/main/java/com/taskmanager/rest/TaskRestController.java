@@ -21,7 +21,7 @@ public class TaskRestController {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(TaskRestController.class);
 
     @Autowired
     private TaskService taskService;
@@ -34,11 +34,11 @@ public class TaskRestController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody Task task) {
-        LOGGER.info("Add new task from user: {}", task.getUserId());
+        log.info("Add new task from user: {}", task.getUserId());
         try {
             taskService.add(task);
         } catch (ServiceException e) {
-            LOGGER.error("Error added new task from user: {}", task.getUserId());
+            log.error("Error added new task from user: {}", task.getUserId());
         }
     }
 
@@ -51,11 +51,11 @@ public class TaskRestController {
     @ResponseStatus(HttpStatus.OK)
     public void stop(@RequestParam(name = "taskId") String taskId,
                      @RequestParam(name = "userId") String userId){
-        LOGGER.info("Stop task with id: {} by user: {}", taskId, userId);
+        log.info("Stop task with id: {} by user: {}", taskId, userId);
         try {
             taskService.stop(taskId, userId);
         } catch (ServiceException e) {
-            LOGGER.error("Error stopped task with id: {} by user: {}", taskId, userId);
+            log.error("Error stopped task with id: {} by user: {}", taskId, userId);
         }
     }
 
@@ -68,11 +68,11 @@ public class TaskRestController {
     @ResponseStatus(HttpStatus.OK)
     public void remove(@RequestParam(name = "taskId") String taskId,
                        @RequestParam(name = "userId") String userId){
-        LOGGER.info("Remove task with id: {} by user: {}", taskId, userId);
+        log.info("Remove task with id: {} by user: {}", taskId, userId);
         try {
             taskService.remove(taskId, userId);
         } catch (ServiceException e) {
-            LOGGER.error("Error removed task with id: {} by user: {}", taskId, userId);
+            log.error("Error removed task with id: {} by user: {}", taskId, userId);
         }
     }
 
@@ -90,7 +90,7 @@ public class TaskRestController {
                            @RequestParam(name = "count") int count,
                            @RequestParam(name = "userId") String userId){
         Page<Task> loadedPage = taskService.load(page, count, userId);
-        LOGGER.debug("Load {} tasks from page: {} with count {} by user: {}", loadedPage.getSize(), page, count, userId);
+        log.debug("Load {} tasks from page: {} with count {} by user: {}", loadedPage.getSize(), page, count, userId);
         return loadedPage;
     }
 

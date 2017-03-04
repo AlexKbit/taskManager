@@ -48,7 +48,7 @@ public class DataLoaderImpl implements DataLoader {
         while ((read = inChannel.read(buffer)) > 0) {
             buffer.rewind();
             buffer.limit(read);
-            while (read > 0) {
+            if (read > 0) {
                 hashSolver.update(buffer.array());
             }
             buffer.clear();

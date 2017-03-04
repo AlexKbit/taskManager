@@ -21,7 +21,7 @@ public class UserRestController {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(UserRestController.class);
 
     /**
      * Get uuid for new user
@@ -32,7 +32,7 @@ public class UserRestController {
     @ResponseBody
     public User get() {
         String uuid = UUID.randomUUID().toString();
-        LOGGER.info("Get new uuid for user: {}", uuid);
+        log.info("Get new uuid for user: {}", uuid);
         return new User(uuid);
     }
 }

@@ -1,5 +1,6 @@
 package com.taskmanager.core.agents;
 
+import com.taskmanager.core.agents.api.Agent;
 import com.taskmanager.model.Task;
 import com.taskmanager.repositories.TaskRepository;
 import org.slf4j.Logger;
@@ -18,12 +19,9 @@ import java.util.List;
  * Agent for remove old tasks
  */
 @Component
-public class RemoveOldTaskAgent {
+public class RemoveOldTaskAgent implements Agent {
 
-    /**
-     * Logger
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RemoveOldTaskAgent.class);
+    private static final Logger log = LoggerFactory.getLogger(RemoveOldTaskAgent.class);
 
     @Autowired
     private TaskRepository taskRepository;
@@ -31,16 +29,17 @@ public class RemoveOldTaskAgent {
     @Value("${app.removeMoreDays:7}")
     private int daysRemember;
 
-    /**
-     * Remove old tasks
-     */
-    @Scheduled(fixedDelayString = "${app.fixedDelay.removeOld:1000}")
+    @Override
+    @Scheduled(fixedRateString = "${app.fixedDelay.removeOld:1000}")
     public void execute() {
         LocalDateTime localDateTime = LocalDateTime.now(ZoneId.systemDefault());
         localDateTime = localDateTime.minusDays(daysRemember);
         Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         List<Task> taskList = taskRepository.findOldByTime(date);
+        if (taskList.isEmpty()) {
+            return;
+        }
+        log.info("The {} tasks after {} date was removed", taskList.size(), date);
         taskRepository.delete(taskList);
-        LOGGER.info("Some tasks after {} date was removed", date);
     }
 }
