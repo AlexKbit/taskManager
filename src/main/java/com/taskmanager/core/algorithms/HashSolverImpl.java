@@ -42,19 +42,15 @@ public class HashSolverImpl implements HashSolver {
 
     @Override
     public String result2Hex() {
-        try {
-            switch (type) {
-                case SHA_1:
-                    return sha1(md.digest());
-                case SHA_256:
-                    return sha256(md.digest());
-                case MD5:
-                    return md5(md.digest());
-                default:
-                    throw new ServiceException("Unknown type for hash");
-            }
-        } catch (NoSuchAlgorithmException e) {
-            throw new ServiceException("Unknown type for hash", e);
+        switch (type) {
+            case SHA_1:
+                return sha1(md.digest());
+            case SHA_256:
+                return sha256(md.digest());
+            case MD5:
+                return md5(md.digest());
+            default:
+                throw new ServiceException("Unknown type for hash");
         }
     }
 
@@ -67,7 +63,7 @@ public class HashSolverImpl implements HashSolver {
         }
     }
 
-    private String md5(byte[] data) throws NoSuchAlgorithmException {
+    private String md5(byte[] data) {
             BigInteger number = new BigInteger(1, data);
             String hashtext = number.toString(16);
             // We need to zero pad it if you actually want the full 32 chars.
@@ -77,11 +73,11 @@ public class HashSolverImpl implements HashSolver {
             return hashtext;
     }
 
-    private String sha256(byte[] data) throws NoSuchAlgorithmException{
+    private String sha256(byte[] data) {
         return String.format("%064x", new java.math.BigInteger(1, data));
     }
 
-    private String sha1(byte[] data) throws NoSuchAlgorithmException{
+    private String sha1(byte[] data) {
         return byteArray2Hex(data);
     }
 
