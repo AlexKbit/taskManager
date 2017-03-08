@@ -78,16 +78,6 @@ public class Task {
     }
 
     /**
-     * Create Task with id and userId
-     * @param id task id
-     * @param userId user id
-     */
-    public Task(String id, String userId) {
-        this.id = id;
-        this.userId = userId;
-    }
-
-    /**
      * Generate uuid.
      */
     @PrePersist

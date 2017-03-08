@@ -2,7 +2,6 @@ package com.taskmanager.rest;
 
 import com.taskmanager.model.Task;
 import com.taskmanager.service.api.TaskService;
-import com.taskmanager.service.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +34,7 @@ public class TaskRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody Task task) {
         log.info("Add new task from user: {}", task.getUserId());
-        try {
-            taskService.add(task);
-        } catch (ServiceException e) {
-            log.error("Error added new task from user: {}", task.getUserId());
-        }
+        taskService.add(task);
     }
 
     /**
@@ -52,11 +47,7 @@ public class TaskRestController {
     public void stop(@RequestParam(name = "taskId") String taskId,
                      @RequestParam(name = "userId") String userId){
         log.info("Stop task with id: {} by user: {}", taskId, userId);
-        try {
-            taskService.stop(taskId, userId);
-        } catch (ServiceException e) {
-            log.error("Error stopped task with id: {} by user: {}", taskId, userId);
-        }
+        taskService.stop(taskId, userId);
     }
 
     /**
@@ -69,11 +60,7 @@ public class TaskRestController {
     public void remove(@RequestParam(name = "taskId") String taskId,
                        @RequestParam(name = "userId") String userId){
         log.info("Remove task with id: {} by user: {}", taskId, userId);
-        try {
-            taskService.remove(taskId, userId);
-        } catch (ServiceException e) {
-            log.error("Error removed task with id: {} by user: {}", taskId, userId);
-        }
+        taskService.remove(taskId, userId);
     }
 
     /**

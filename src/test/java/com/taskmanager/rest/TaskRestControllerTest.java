@@ -49,8 +49,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class TaskRestControllerTest {
 
     private static final String USER_ID = "9ac8087d-fc14-4e4f-b9d0-5c4b9e05a000";
-    private static final String TASK_IN_PROGRESS_ID = "ac8087d-fc14-4e4f-b9d0-5c4b9e05a501";
-    private static final String TASK_SUCCESS_ID = "ac8087d-fc14-4e4f-b9d0-5c4b9e05a502";
+    private static final String TASK_IN_PROGRESS_ID = "8ac8087d-fc14-4e4f-b9d0-5c4b9e05a501";
+    private static final String TASK_SUCCESS_ID = "8ac8087d-fc14-4e4f-b9d0-5c4b9e05a502";
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
