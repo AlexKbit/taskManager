@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <TASK ID="8ac8087d-fc14-4e4f-b9d0-5c4b9e05a501"
+          CREATED_AT="2016-06-30"
+          USER_ID="9ac8087d-fc14-4e4f-b9d0-5c4b9e05a000"
+          SRC="http://www.yandex.ru"
+          ALGORITHM="MD5"
+          STATUS="IN_PROGRESS"
+          EXECUTE_TIME="100"/>
+
+    <TASK ID="8ac8087d-fc14-4e4f-b9d0-5c4b9e05a502"
+          CREATED_AT="2016-06-30"
+          USER_ID="9ac8087d-fc14-4e4f-b9d0-5c4b9e05a000"
+          SRC="http://www.yandex.ru"
+          ALGORITHM="MD5"
+          STATUS="SUCCESS"
+          EXECUTE_TIME="100"
+          RESULT="d41d8cd98f00b204e9800998ecf8427e"/>
+
+    <TASK ID="8ac8087d-fc14-4e4f-b9d0-5c4b9e05a503"
+          CREATED_AT="2016-06-30"
+          USER_ID="9ac8087d-fc14-4e4f-b9d0-5c4b9e05a900"
+          SRC="http://www.yandex.ru"
+          ALGORITHM="MD5"
+          STATUS="SUCCESS"
+          EXECUTE_TIME="100"
+          RESULT="d41d8cd98f00b204e9800998ecf8427e"/>
+</dataset>
