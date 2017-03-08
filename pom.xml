@@ -4,7 +4,7 @@
 
     <groupId>com.taskmanager</groupId>
     <artifactId>taskmanager-app</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <name>Task manager</name>
 
