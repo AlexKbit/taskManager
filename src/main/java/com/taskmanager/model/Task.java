@@ -48,7 +48,7 @@ public class Task {
      * Data
      */
     @Lob
-    @Column(length=100000)
+    @Column(name = "data", length=100000)
     private byte[] data;
 
     /**

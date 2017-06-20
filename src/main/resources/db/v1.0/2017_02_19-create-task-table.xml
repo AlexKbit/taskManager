@@ -16,9 +16,10 @@
             </column>
             <column name="created_at" type="TIMESTAMP(6) WITHOUT TIME ZONE" defaultValueComputed="CURRENT_TIMESTAMP"/>
             <column name="user_id" type="VARCHAR(64)"/>
-            <column name="src" type="VARCHAR(1024)"/>
-            <column name="algorithm" type="VARCHAR(64)"/>
+            <column name="src" type="TEXT"/>
             <column name="status" type="VARCHAR(64)"/>
+            <column name="property" type="TEXT"/>
+            <column name="data" type="VARBINARY"/>
             <column name="error_msg" type="TEXT"/>
             <column name="execute_time" type="BIGINT"/>
             <column name="result" type="TEXT"/>
