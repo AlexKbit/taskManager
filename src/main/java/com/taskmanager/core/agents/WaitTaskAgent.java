@@ -21,7 +21,7 @@ public class WaitTaskAgent extends AbstractTaskAgent {
      * Constructor for TaskInProgressAgent
      */
     public WaitTaskAgent() {
-        super(TaskStatus.WAIT, TaskStatus.IN_PROGRESS);
+        super(TaskStatus.WAIT, TaskStatus.LOADING);
     }
 
     /**
@@ -31,9 +31,6 @@ public class WaitTaskAgent extends AbstractTaskAgent {
     protected void performTask(Task task) {
         if (task.getSrc() == null || task.getSrc().isEmpty()) {
             throw new ServiceException("Unknown url to resources");
-        }
-        if (task.getAlgo() == null) {
-            throw new ServiceException("Unknown algorithm for solve hash");
         }
         log.debug("Validation successfully completed for task with id = {}", task.getId());
     }

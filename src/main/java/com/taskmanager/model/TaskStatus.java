@@ -9,6 +9,10 @@ public enum TaskStatus {
      */
     WAIT,
     /**
+     * Task in process of load data
+     */
+    LOADING,
+    /**
      * Task in progress
      */
     IN_PROGRESS,

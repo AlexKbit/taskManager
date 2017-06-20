@@ -3,32 +3,32 @@ package com.taskmanager.core.agents;
 import com.taskmanager.core.agents.api.AbstractTaskAgent;
 import com.taskmanager.model.Task;
 import com.taskmanager.model.TaskStatus;
-import com.taskmanager.service.api.ClassExecuteService;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Agent for execute tasks in status IN_PROGRESS -> SUCCESS
  */
 @Component
-public class InProgressTaskAgent extends AbstractTaskAgent {
+public class LoaderTaskAgent extends AbstractTaskAgent {
 
     /**
      * Logger
      */
-    private static final Logger log = LoggerFactory.getLogger(InProgressTaskAgent.class);
-
-    @Autowired
-    private ClassExecuteService classExecuteServuce;
+    private static final Logger log = LoggerFactory.getLogger(LoaderTaskAgent.class);
 
     /**
      * Constructor for TaskInProgressAgent
      */
-    public InProgressTaskAgent() {
-        super(TaskStatus.IN_PROGRESS, TaskStatus.SUCCESS);
+    public LoaderTaskAgent() {
+        super(TaskStatus.LOADING, TaskStatus.IN_PROGRESS);
     }
 
     /**
@@ -36,8 +36,14 @@ public class InProgressTaskAgent extends AbstractTaskAgent {
      */
     @Override
     protected void performTask(Task task) {
-
-        log.info("Class executed for task with id = {}", task.getId());
+        try (InputStream input = new URL(task.getSrc()).openStream()) {
+            byte[] bytes = IOUtils.toByteArray(input);
+            task.setData(bytes);
+            log.info("Data successfully loaded for task with id = {}", task.getId());
+        } catch (IOException e) {
+            task.setErrorMsg(e.getMessage());
+            log.error("Error load data for task with id = {}", task.getId(), e);
+        }
     }
 
     @Override

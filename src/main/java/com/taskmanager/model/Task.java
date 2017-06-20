@@ -39,11 +39,11 @@ public class Task {
     private String src;
 
     /**
-     * Algorithm
+     * Data
      */
-    @Enumerated(EnumType.STRING)
-    @Column(name = "algorithm")
-    private HashType algo;
+    @Lob
+    @Column(length=100000)
+    private byte[] data;
 
     /**
      * Status
@@ -63,13 +63,6 @@ public class Task {
      */
     @Column(name = "execute_time")
     private long time;
-
-
-    /**
-     * Result
-     */
-    @Column(name = "result")
-    private String result;
 
     /**
      * Create Task
@@ -120,16 +113,8 @@ public class Task {
         this.src = src;
     }
 
-    public HashType getAlgo() {
-        return algo;
-    }
-
     public void applyTime(long time) {
         this.time += time;
-    }
-
-    public void setAlgo(HashType algo) {
-        this.algo = algo;
     }
 
     public String getErrorMsg() {
@@ -148,19 +133,19 @@ public class Task {
         this.time = time;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
     public TaskStatus getStatus() {
         return status;
     }
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }
