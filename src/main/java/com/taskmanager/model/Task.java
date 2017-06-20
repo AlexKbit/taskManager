@@ -39,11 +39,23 @@ public class Task {
     private String src;
 
     /**
+     * Property
+     */
+    @Column(name = "property")
+    private String property;
+
+    /**
      * Data
      */
     @Lob
     @Column(length=100000)
     private byte[] data;
+
+    /**
+     * Result
+     */
+    @Column(name = "result")
+    private String result;
 
     /**
      * Status
@@ -147,5 +159,21 @@ public class Task {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public String getProperty() {
+        return property;
+    }
+
+    public void setProperty(String property) {
+        this.property = property;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

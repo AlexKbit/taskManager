@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * Agent for execute tasks in status IN_PROGRESS -> SUCCESS
+ * Agent for execute tasks in status LOADING -> IN_PROGRESS
  */
 @Component
 public class LoaderTaskAgent extends AbstractTaskAgent {
@@ -47,7 +47,7 @@ public class LoaderTaskAgent extends AbstractTaskAgent {
     }
 
     @Override
-    @Scheduled(fixedRateString = "${app.fixedDelay.hashSolveTask:1000}")
+    @Scheduled(fixedRateString = "${app.fixedDelay.LoaderTask:1000}")
     public void execute() {
         super.execute();
     }

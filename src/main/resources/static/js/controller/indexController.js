@@ -27,7 +27,7 @@ App.controller('indexController', ['$scope', 'UserService', 'TaskService', '$int
     $scope.newTask = function (task) {
         task.userId = $scope.userId;
         TaskService.createTask(task).then(function (results) {
-            console.log("New task with src: " + task.src + "algo: " + task.algo);
+            console.log("New task with src: " + task.src + " property: " + task.property);
             $scope.pageChanged();
         }, function (error) {
             console.log(error.message);

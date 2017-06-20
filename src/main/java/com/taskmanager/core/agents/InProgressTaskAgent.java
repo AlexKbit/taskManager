@@ -36,12 +36,12 @@ public class InProgressTaskAgent extends AbstractTaskAgent {
      */
     @Override
     protected void performTask(Task task) {
-
+        classExecuteServuce.execute(task);
         log.info("Class executed for task with id = {}", task.getId());
     }
 
     @Override
-    @Scheduled(fixedRateString = "${app.fixedDelay.hashSolveTask:1000}")
+    @Scheduled(fixedRateString = "${app.fixedDelay.ExecuteTask:1000}")
     public void execute() {
         super.execute();
     }

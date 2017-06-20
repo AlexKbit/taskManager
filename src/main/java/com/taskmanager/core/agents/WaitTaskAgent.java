@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * Agent for execute tasks in status WAIT -> IN_PROGRESS
+ * Agent for execute tasks in status WAIT -> LOADING
  */
 @Component
 public class WaitTaskAgent extends AbstractTaskAgent {
