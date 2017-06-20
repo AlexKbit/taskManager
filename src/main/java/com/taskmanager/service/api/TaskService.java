@@ -1,7 +1,6 @@
 package com.taskmanager.service.api;
 
 import com.taskmanager.model.Task;
-import com.taskmanager.service.exception.ServiceException;
 import org.springframework.data.domain.Page;
 
 /**
@@ -12,25 +11,22 @@ public interface TaskService {
     /**
      * Add new task
      * @param task {@link Task}
-     * @throws ServiceException
      */
-    void add(Task task) throws ServiceException;
+    void add(Task task);
 
     /**
      * Stop task by taskId and userId
      * @param taskId taskId
      * @param userId userId
-     * @throws ServiceException
      */
-    void stop(String taskId, String userId) throws ServiceException;
+    void stop(String taskId, String userId);
 
     /**
      * Remove task by taskId and userId
      * @param taskId taskId
      * @param userId userId
-     * @throws ServiceException
      */
-    void remove(String taskId, String userId) throws ServiceException;
+    void remove(String taskId, String userId);
 
     /**
      * Load tasks on page

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+import static javax.persistence.FetchType.LAZY;
+
 /**
  * Entity for Task
  */
@@ -47,9 +49,9 @@ public class Task {
     /**
      * Data
      */
-    @Lob
-    @Column(name = "data", length=100000)
-    private byte[] data;
+    @Basic(fetch=LAZY)
+    @Column(name = "data")
+    private byte[] data = new byte[0];
 
     /**
      * Result

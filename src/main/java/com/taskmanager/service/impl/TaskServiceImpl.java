@@ -25,7 +25,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
 
     @Override
-    public void add(Task task) throws ServiceException {
+    public void add(Task task) {
         if (task == null) {
             log.error("Task is null");
             throw new ServiceException("Task is null");
@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void stop(String taskId, String userId) throws ServiceException {
+    public void stop(String taskId, String userId) {
         Task task = taskRepository.findOne(taskId);
         if (task == null) {
             log.error("Task with id = {} not found", taskId);
@@ -57,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void remove(String taskId, String userId) throws ServiceException {
+    public void remove(String taskId, String userId) {
         Task task = taskRepository.findOne(taskId);
         if (task == null) {
             log.info("Task with id = {} already removed", taskId);

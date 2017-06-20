@@ -27,4 +27,9 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="2017_06_20-update-task-table" author="alexkbit">
+        <modifyDataType  schemaName="public" tableName="task"
+                         columnName="data" newDataType="longvarbinary"/>
+    </changeSet>
+
 </databaseChangeLog>
